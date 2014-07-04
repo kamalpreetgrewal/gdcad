@@ -2,7 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QPaintEvent>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
 namespace Ui {
 class MainWindow;
@@ -16,13 +17,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-protected:
-    void paintEvent(QPaintEvent *event);
+private slots:
+    void drawLine();
 
 private:
     Ui::MainWindow *ui;
-
-
+    QGraphicsScene *scene;
+    QGraphicsLineItem *line;
 };
 
 #endif // MAINWINDOW_H
