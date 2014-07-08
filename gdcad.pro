@@ -13,8 +13,16 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    circle.cpp \
+    ellipse.cpp \
+    point.cpp \
+    line.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    circle.h \
+    ellipse.h \
+    point.h \
+    line.h
 
 FORMS    += mainwindow.ui

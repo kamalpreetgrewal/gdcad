@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 #include <QMouseEvent>
-#include <QPainter>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), mStartX(0), mStartY(0), mEndX(0), mEndY(0), mFirstClick(true), mPaintFlag(false),
@@ -9,7 +10,39 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle(tr("GD CAD"));
-    ui->setupUi(this);
+    scene =  new QGraphicsScene;
+    connect(ui->lineButton, SIGNAL(clicked()), this, SLOT(drawLine()));
+    connect(ui->circleButton, SIGNAL(clicked()), this, SLOT(drawCircle()));
+    connect(ui->pointButton, SIGNAL(clicked()), this, SLOT(drawPoint()));
+    connect(ui->ellipseButton, SIGNAL(clicked()), this, SLOT(drawEllipse()));
+}
+
+void MainWindow::drawLine(){
+    ui->graphicsView->setScene(scene);
+    line *item = new line;
+    scene->addItem(item);
+    qDebug() << "Line Created";
+}
+
+void MainWindow::drawCircle(){
+    ui->graphicsView->setScene(scene);
+    circle *item = new circle;
+    scene->addItem(item);
+    qDebug() << "Circle Created";
+}
+
+void MainWindow::drawEllipse(){
+    ui->graphicsView->setScene(scene);
+    ellipse *item = new ellipse;
+    scene->addItem(item);
+    qDebug() << "Ellipse Created";
+}
+
+void MainWindow::drawPoint(){
+    ui->graphicsView->setScene(scene);
+    point *item = new point;
+    scene->addItem(item);
+    qDebug() << "Point Created";
 }
 
 void MainWindow::mousePressEvent(QMouseEvent * e)
