@@ -9,7 +9,7 @@ point::point()
 QRectF point::boundingRect() const
 {
     // outer most edges
-    return QRectF(0,0,100,100);
+    return QRectF(0,0,300,300);
 }
 
 void point:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
@@ -19,9 +19,9 @@ void point:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     painter->drawPoint(100,100);
 }
 
-void point::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void point::mousePressEvent(QGraphicsSceneMouseEvent *e)
 {
-    QGraphicsItem::mousePressEvent(event);
+    QGraphicsItem::mousePressEvent(e);
     update();
 }
 void point::mouseMoveEvent(QGraphicsSceneMouseEvent *e)
