@@ -75,6 +75,10 @@ void MainWindow::mousePressEvent(QMouseEvent * e)
             update();
         }
     }
+    if(e->button() == Qt::MiddleButton)
+    {
+        ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
+    }
 }
 void MainWindow::paintEvent(QPaintEvent * e)
 {
@@ -105,6 +109,22 @@ void MainWindow::paintEvent(QPaintEvent * e)
         painter.setPen(linepen);
         painter.drawLine(p1, p2);
     }
+}
+
+void MainWindow::wheelEvent(QWheelEvent* event) {
+
+    ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+
+    // Scale the view / do the zoom
+    double scaleFactor = 1.15;
+    if(event->delta() > 0) {
+        // Zoom in
+      ui->graphicsView->scale(scaleFactor, scaleFactor);
+    } else {
+        // Zooming out
+        ui->graphicsView->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
+    }
+
 }
 
 

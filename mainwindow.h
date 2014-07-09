@@ -3,6 +3,7 @@
 #include <QMainWindow>
 #include <QPaintEvent>
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include <QPainter>
 #include "line.h"
 #include "circle.h"
@@ -23,7 +24,8 @@ public:
 
 protected:
     void mousePressEvent(QMouseEvent *e);
-    void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent *e);
+    void wheelEvent(QWheelEvent* event);
 
 private:
     Ui::MainWindow *ui;

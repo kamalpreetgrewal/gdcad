@@ -19,6 +19,8 @@ public:
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *e);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *e);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *e);
 
 public slots:
     void changeScale(int scale);
@@ -34,8 +36,7 @@ private:
     QPoint *mousePoint;
     Ui::MainWindow *ui;
     qreal m_scale;
-
-
+    QVector<QPointF> stuff;
 };
 
 #endif // LINE_H

@@ -8,6 +8,8 @@ line::line()
     x2 = 0;
     y2 = 0;
     mFirstClick = true;
+    setFlags(ItemIsSelectable | ItemIsMovable);
+    setAcceptHoverEvents(true);
 }
 
 QRectF line::boundingRect() const
@@ -31,6 +33,8 @@ void line::mousePressEvent(QGraphicsSceneMouseEvent* e){
          update();
      }
 }
+ QGraphicsItem::mousePressEvent(e);
+ update();
 }
 
 void line:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
@@ -61,9 +65,22 @@ void line:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
         painter->setPen(linepen);
         painter->drawLine(p1, p2);
     }
-
 }
 
+void line::mouseMoveEvent(QGraphicsSceneMouseEvent *e)
+{
+    if (e->modifiers() & Qt::ShiftModifier) {
+        stuff << e->pos();
+        update();
+        return;
+    }
+    QGraphicsItem::mouseMoveEvent(e);
+}
 
+void line::mouseReleaseEvent(QGraphicsSceneMouseEvent *e)
+{
+    QGraphicsItem::mouseReleaseEvent(e);
+    update();
+}
 
 
