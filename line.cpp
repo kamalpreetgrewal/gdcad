@@ -8,6 +8,8 @@ line::line()
     x2 = 0;
     y2 = 0;
     mFirstClick = true;
+ setFlags(ItemIsSelectable | ItemIsMovable);
+ setAcceptHoverEvents(true);
 }
 
 QRectF line::boundingRect() const
