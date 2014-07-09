@@ -14,7 +14,7 @@ ellipse::ellipse()
 QRectF ellipse::boundingRect() const
 {
     // outer most edges
-    return QRectF(0,0,300,300);
+    return QRectF(0,0,800,800);
 }
 
 
