@@ -7,7 +7,7 @@ ellipse::ellipse()
     x2 = 0;
     y2 = 0;
     mFirstClick = true;
-    setFlags(ItemIsSelectable | ItemIsMovable);
+    setFlags(ItemIsSelectable);
     setAcceptHoverEvents(true);
 }
 

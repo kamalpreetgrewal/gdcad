@@ -6,7 +6,7 @@ point::point()
     y1 = 0;
 
     mFirstClick = true;
-    setFlags(ItemIsSelectable | ItemIsMovable);
+    setFlags(ItemIsSelectable );
     setAcceptHoverEvents(true);
 }
 
