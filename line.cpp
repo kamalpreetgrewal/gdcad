@@ -13,7 +13,7 @@ line::line()
 QRectF line::boundingRect() const
 {
     // outer most edges
-    return QRectF(0,0,100,100);
+    return QRectF(0,0,300,300);
 }
 void line::mousePressEvent(QGraphicsSceneMouseEvent* e){
  if(e->button()==Qt::LeftButton) {
@@ -32,7 +32,6 @@ void line::mousePressEvent(QGraphicsSceneMouseEvent* e){
      }
 }
 }
-
 
 void line:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
     QRectF rect = boundingRect();
@@ -62,10 +61,9 @@ void line:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
         painter->setPen(linepen);
         painter->drawLine(p1, p2);
     }
+
 }
 
-//void line::wheelEvent(QGraphicsSceneWheelEvent *e){
-//    m_scale += e->delta() / qreal(600);
-//        m_scale = qMax(qreal(0.1), qMin(qreal(4), m_scale));
-//        emit scaleChanged(int(m_scale*1000));
-//}
+
+
+

@@ -11,10 +11,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle(tr("GD CAD"));
     scene =  new QGraphicsScene;
+    for(int x = 0; x <= ui->graphicsView->width(); x += 10){
+        scene->addLine(x,0,x,ui->graphicsView->height(),QPen(Qt::green));
+    }
+    for(int y = 0; y <= ui->graphicsView->height(); y += 10){
+        scene->addLine(0,y,ui->graphicsView->width(),y,QPen(Qt::green));
+    }
+    ui->graphicsView->setScene(scene);
     connect(ui->lineButton, SIGNAL(clicked()), this, SLOT(drawLine()));
     connect(ui->circleButton, SIGNAL(clicked()), this, SLOT(drawCircle()));
     connect(ui->pointButton, SIGNAL(clicked()), this, SLOT(drawPoint()));
     connect(ui->ellipseButton, SIGNAL(clicked()), this, SLOT(drawEllipse()));
+
 }
 
 void MainWindow::drawLine(){
@@ -22,6 +30,7 @@ void MainWindow::drawLine(){
     line *item = new line;
     scene->addItem(item);
     qDebug() << "Line Created";
+
 }
 
 void MainWindow::drawCircle(){

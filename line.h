@@ -17,18 +17,14 @@ public:
     qreal scale() const { return m_scale; }
     void setScale(qreal s);
 
-
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *e);
-    //void wheelEvent(QGraphicsSceneWheelEvent *e);
-public slots:
-    //void ZoomIn{scale(1.4,1.4)};
-    void changeScale(int scale);
 
+public slots:
+    void changeScale(int scale);
 
 signals:
     void scaleChanged(int scale);
-
 
 private:
     int x1, y1, x2, y2;
@@ -38,6 +34,8 @@ private:
     QPoint *mousePoint;
     Ui::MainWindow *ui;
     qreal m_scale;
+
+
 };
 
 #endif // LINE_H
