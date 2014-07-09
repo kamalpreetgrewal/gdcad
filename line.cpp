@@ -10,6 +10,8 @@ line::line()
     mFirstClick = true;
     setFlags(ItemIsSelectable | ItemIsMovable);
     setAcceptHoverEvents(true);
+ setFlags(ItemIsSelectable | ItemIsMovable);
+ setAcceptHoverEvents(true);
 }
 
 QRectF line::boundingRect() const
