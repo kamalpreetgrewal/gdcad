@@ -3,7 +3,7 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
-
+#include "ui_mainwindow.h"
 class ellipse: public QGraphicsItem
 {
 public:
@@ -20,6 +20,19 @@ protected:
 
 private:
     QVector<QPointF> stuff;
+    int x1, y1, x2, y2;
+    bool mFirstClick;
+    bool mPaintFlag;
+    bool Pressed;
+    QPoint *mousePoint;
+ Ui::MainWindow *ui;
+    qreal m_scale;
+
+public slots:
+    void changeScale(int scale);
+
+signals:
+    void scaleChanged(int scale);
 };
 
 #endif // ELLIPSE_H
