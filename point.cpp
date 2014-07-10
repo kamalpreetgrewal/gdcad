@@ -4,10 +4,8 @@ point::point()
 {
     x1 = 0;
     y1 = 0;
-
     mClick = true;
-
-    setFlags(ItemIsSelectable );
+    setFlags(ItemIsSelectable);
     setAcceptHoverEvents(true);
 }
 
@@ -22,7 +20,6 @@ void point:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     QPen pen(Qt::black, 4);
 
     if(mPaintFlag){
-
         QPen paintpen(Qt::red);
         paintpen.setWidth(4);
 
@@ -32,7 +29,6 @@ void point:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 
         painter->setPen(paintpen);
         painter->drawPoint(p1);
-
     }
 }
 
@@ -46,11 +42,11 @@ void point::mousePressEvent(QGraphicsSceneMouseEvent *e)
             mPaintFlag = true;
             update();
         }
-
-       }
+    }
     QGraphicsItem::mousePressEvent(e);
     update();
 }
+
 void point::mouseMoveEvent(QGraphicsSceneMouseEvent *e)
 {
     if (e->modifiers() & Qt::ShiftModifier) {
