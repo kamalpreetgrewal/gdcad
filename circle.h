@@ -5,6 +5,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
 #include "ui_mainwindow.h"
+#include "qmath.h"
 
 class circle: public QGraphicsItem
 {
@@ -20,12 +21,13 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *e);
 
 private:
-    int x1, y1, x2, y2;
+    int x1, y1, x2, y2, radius;
     bool mFirstClick;
+    bool mSecondClick;
     bool mPaintFlag;
     bool Pressed;
     QPoint *mousePoint;
- Ui::MainWindow *ui;
+    Ui::MainWindow *ui;
     qreal m_scale;
 
 public slots:
@@ -33,7 +35,6 @@ public slots:
 
 signals:
     void scaleChanged(int scale);
-
 
 private:
     QVector<QPointF> stuff;

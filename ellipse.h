@@ -4,6 +4,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
 #include "ui_mainwindow.h"
+#include "qmath.h"
 class ellipse: public QGraphicsItem
 {
 public:
@@ -20,12 +21,15 @@ protected:
 
 private:
     QVector<QPointF> stuff;
-    int x1, y1, x2, y2;
+    int x1, y1, x2, y2, x3, y3;
+    int majRadius, minRadius;
     bool mFirstClick;
+    bool mSecondClick;
+    bool mThirdClick;
     bool mPaintFlag;
     bool Pressed;
     QPoint *mousePoint;
- Ui::MainWindow *ui;
+    Ui::MainWindow *ui;
     qreal m_scale;
 
 public slots:

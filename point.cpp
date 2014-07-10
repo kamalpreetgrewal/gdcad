@@ -2,9 +2,8 @@
 
 point::point()
 {
-    x1 = 0;
-    y1 = 0;
     mClick = true;
+    mPaintFlag = false;
     setFlags(ItemIsSelectable);
     setAcceptHoverEvents(true);
 }
