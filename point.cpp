@@ -5,7 +5,8 @@ point::point()
     x1 = 0;
     y1 = 0;
 
-    mFirstClick = true;
+    mClick = true;
+
     setFlags(ItemIsSelectable );
     setAcceptHoverEvents(true);
 }
@@ -23,10 +24,7 @@ void point:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     if(mPaintFlag){
 
         QPen paintpen(Qt::red);
-        paintpen.setWidth(1);
-
-        QPen linepen(Qt::black);
-        linepen.setWidth(1);
+        paintpen.setWidth(4);
 
         QPoint p1;
         p1.setX(x1);
@@ -35,30 +33,21 @@ void point:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
         painter->setPen(paintpen);
         painter->drawPoint(p1);
 
-
-
-        painter->setPen(linepen);
-        painter->drawPoint(x1, y1);
     }
 }
 
 void point::mousePressEvent(QGraphicsSceneMouseEvent *e)
 {
     if(e->button()==Qt::LeftButton) {
-        if(mFirstClick){
+        if(mClick){
             x1 = e->pos().x();
             y1 = e->pos().y();
-            mFirstClick = false;
-        }
-
-        else if(!mFirstClick){
-            x2 = e->pos().x();
-            y2 = e->pos().y();
-            mFirstClick = true;
+            mClick = false;
             mPaintFlag = true;
             update();
         }
-   }
+
+       }
     QGraphicsItem::mousePressEvent(e);
     update();
 }

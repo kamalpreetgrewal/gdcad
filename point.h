@@ -22,8 +22,8 @@ protected:
 
 private:
     QVector<QPointF> stuff;
-    int x1, y1, x2, y2;
-    bool mFirstClick;
+    int x1, y1;
+    bool mClick;
     bool mPaintFlag;
     bool Pressed;
     QPoint *mousePoint;

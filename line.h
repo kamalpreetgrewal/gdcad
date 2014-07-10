@@ -31,6 +31,7 @@ signals:
 private:
     int x1, y1, x2, y2;
     bool mFirstClick;
+    bool mSecondClick;
     bool mPaintFlag;
     bool Pressed;
     QPoint *mousePoint;

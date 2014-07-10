@@ -8,6 +8,7 @@ line::line()
     x2 = 0;
     y2 = 0;
     mFirstClick = true;
+    mSecondClick = false;
     setFlags(ItemIsSelectable);
     setAcceptHoverEvents(true);
 
@@ -24,13 +25,14 @@ void line::mousePressEvent(QGraphicsSceneMouseEvent* e){
          x1 = e->pos().x();
          y1 = e->pos().y();
          mFirstClick = false;
+         mSecondClick = true;
      }
 
-     else if(!mFirstClick){
+     else if(!mFirstClick && mSecondClick){
          x2 = e->pos().x();
          y2 = e->pos().y();
-         mFirstClick = true;
          mPaintFlag = true;
+         mSecondClick = false;
          update();
      }
 }
