@@ -6,8 +6,9 @@
 #include <QGraphicsSceneMouseEvent>
 #include "ui_mainwindow.h"
 
-class point: public QGraphicsItem
+class point: public QObject,public QGraphicsItem
 {
+    Q_OBJECT
 public:
     point();
     QRectF boundingRect() const;
@@ -29,6 +30,8 @@ private:
     QPoint *mousePoint;
     Ui::MainWindow *ui;
     qreal m_scale;
+signals:
+    void DrawFinished();
 };
 
 #endif // POINT_H

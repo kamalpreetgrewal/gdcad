@@ -35,23 +35,26 @@ void MainWindow::drawLine(){
 
 void MainWindow::drawCircle(){
     ui->graphicsView->setScene(scene);
-    circle *item = new circle;
-    scene->addItem(item);
+    item1 = new circle;
+    scene->addItem(item1);
     qDebug() << "Circle Created";
+    connect(item1,SIGNAL(DrawFinished()),this,SLOT(drawCircle()));
 }
 
 void MainWindow::drawEllipse(){
     ui->graphicsView->setScene(scene);
-    ellipse *item = new ellipse;
-    scene->addItem(item);
+    item2 = new ellipse;
+    scene->addItem(item2);
     qDebug() << "Ellipse Created";
+    connect(item2,SIGNAL(DrawFinished()),this,SLOT(drawEllipse()));
 }
 
 void MainWindow::drawPoint(){
     ui->graphicsView->setScene(scene);
-    point *item = new point;
-    scene->addItem(item);
+  item3 = new point;
+    scene->addItem(item3);
     qDebug() << "Point Created";
+    connect(item3,SIGNAL(DrawFinished()),this,SLOT(drawPoint()));
 }
 
 
@@ -78,15 +81,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::keyPressEvent(QKeyEvent *event)
-{
-    if(event->key()== Qt::Key_Escape)
-    {
-        disconnect(item,SIGNAL(DrawFinished()),this,SLOT(drawLine()));
-                scene->removeItem(item);
-        delete item;
-    }
-}
 
 
 

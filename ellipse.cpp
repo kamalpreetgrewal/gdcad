@@ -41,10 +41,12 @@ void ellipse::mousePressEvent(QGraphicsSceneMouseEvent *e)
             mThirdClick = false;
             mPaintFlag = true;
             update();
+            emit DrawFinished();
         }
     }
     QGraphicsItem::mousePressEvent(e);
     update();
+
 }
 void ellipse::mouseMoveEvent(QGraphicsSceneMouseEvent *e)
 {

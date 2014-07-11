@@ -4,17 +4,21 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
+#include<QMouseEvent>
+#include<QDebug>
 #include "ui_mainwindow.h"
 #include "qmath.h"
 
-class circle: public QGraphicsItem
+class circle: public QObject, public QGraphicsItem
 {
+    Q_OBJECT
 public:
     circle();
     QRectF boundingRect() const;
     virtual void paint(QPainter * painter,
                        const QStyleOptionGraphicsItem * option,
                        QWidget * widget);
+
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *e);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *e);
@@ -31,13 +35,15 @@ private:
     qreal m_scale;
 
 public slots:
-    void changeScale(int scale);
+    //void changeScale(int scale);
 
 signals:
     void scaleChanged(int scale);
-
+    void DrawFinished();
 private:
     QVector<QPointF> stuff;
+
+
 };
 
 #endif // CIRCLE_H

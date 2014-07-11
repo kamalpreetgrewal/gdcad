@@ -26,7 +26,7 @@ protected:
 //    void mousePressEvent(QMouseEvent *e);
   //  void paintEvent(QPaintEvent *e);
     void wheelEvent(QWheelEvent* event);
-void keyPressEvent(QKeyEvent *event);
+//void keyPressEvent(QKeyEvent *event);
 private:
     Ui::MainWindow *ui;
     bool mFirstClick;
@@ -38,6 +38,11 @@ private:
     QGraphicsScene *scene;
     QPainter *painter;
     line *item;
+    circle *item1;
+    point *item3;
+    ellipse *item2;
+
+
 
 private slots:
     void drawLine();

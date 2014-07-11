@@ -31,10 +31,12 @@ void circle::mousePressEvent(QGraphicsSceneMouseEvent *e)
             mPaintFlag = true;
             mSecondClick = false;
             update();
+            emit DrawFinished();
         }
     }
     QGraphicsItem::mousePressEvent(e);
     update();
+
 }
 
 void circle:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){

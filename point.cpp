@@ -40,6 +40,7 @@ void point::mousePressEvent(QGraphicsSceneMouseEvent *e)
             mClick = false;
             mPaintFlag = true;
             update();
+            emit DrawFinished();
         }
     }
     QGraphicsItem::mousePressEvent(e);

@@ -2,11 +2,14 @@
 #define ELLIPSE_H
 #include <QPainter>
 #include <QGraphicsItem>
+#include<QMouseEvent>
+#include<QDebug>
 #include <QGraphicsSceneMouseEvent>
 #include "ui_mainwindow.h"
 #include "qmath.h"
-class ellipse: public QGraphicsItem
+class ellipse: public QObject, public QGraphicsItem
 {
+    Q_OBJECT
 public:
     ellipse();
     QRectF boundingRect() const;
@@ -33,10 +36,11 @@ private:
     qreal m_scale;
 
 public slots:
-    void changeScale(int scale);
+    //void changeScale(int scale);
 
 signals:
     void scaleChanged(int scale);
+    void DrawFinished();
 };
 
 #endif // ELLIPSE_H
