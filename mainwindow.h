@@ -9,7 +9,7 @@
 #include "circle.h"
 #include "ellipse.h"
 #include "point.h"
-
+#include<QKeyEvent>
 namespace Ui {
 class MainWindow;
 }
@@ -23,10 +23,10 @@ public:
     ~MainWindow();
 
 protected:
-    void mousePressEvent(QMouseEvent *e);
-    void paintEvent(QPaintEvent *e);
+//    void mousePressEvent(QMouseEvent *e);
+  //  void paintEvent(QPaintEvent *e);
     void wheelEvent(QWheelEvent* event);
-
+void keyPressEvent(QKeyEvent *event);
 private:
     Ui::MainWindow *ui;
     bool mFirstClick;
@@ -37,6 +37,7 @@ private:
     int mEndY;
     QGraphicsScene *scene;
     QPainter *painter;
+    line *item;
 
 private slots:
     void drawLine();

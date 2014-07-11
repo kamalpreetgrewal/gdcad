@@ -8,8 +8,9 @@
 #include <QGraphicsSceneMouseEvent>
 #include "ui_mainwindow.h"
 
-class line: public QGraphicsItem
+class line: public QObject,public QGraphicsItem
 {
+    Q_OBJECT
 public:
     line();
     QRectF boundingRect() const;
@@ -22,12 +23,12 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *e);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *e);
 
-public slots:
-    void changeScale(int scale);
+//public slots:
+   // void changeScale(int scale);
 
 signals:
     void scaleChanged(int scale);
-
+     void DrawFinished();
 private:
     int x1, y1, x2, y2;
     bool mFirstClick;

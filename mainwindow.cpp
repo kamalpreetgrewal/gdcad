@@ -27,10 +27,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::drawLine(){
     ui->graphicsView->setScene(scene);
-    line *item = new line;
+    item = new line;
     scene->addItem(item);
     qDebug() << "Line Created";
-
+    connect(item,SIGNAL(DrawFinished()),this,SLOT(drawLine()));
 }
 
 void MainWindow::drawCircle(){
@@ -54,62 +54,7 @@ void MainWindow::drawPoint(){
     qDebug() << "Point Created";
 }
 
-void MainWindow::mousePressEvent(QMouseEvent * e)
-{
-    if(e->button() == Qt::LeftButton)
-    {
-        //store 1st point
-        if(mFirstClick)
-        {
-            mStartX = e->x();
-            mStartY = e->y();
-            mFirstClick = false;
-        }
-        //Mouse Pressed Again! 2nd point
-        else if(!mFirstClick)
-        {
-            mEndX = e->x();
-            mEndY = e->y();
-            mFirstClick = true;
-            mPaintFlag = true;
-            update();
-        }
-    }
-    if(e->button() == Qt::MiddleButton)
-    {
-        ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
-    }
-}
-void MainWindow::paintEvent(QPaintEvent * e)
-{
 
-    if(mPaintFlag)
-    {
-        QPainter painter(this);
-        QPen paintpen(Qt::red);
-        paintpen.setWidth(1);
-
-        QPen linepen(Qt::black);
-        linepen.setWidth(1);
-
-        QPoint p1;
-        p1.setX(mStartX);
-        p1.setY(mStartY);
-
-        painter.setPen(paintpen);
-        painter.drawPoint(p1);
-
-        QPoint p2;
-        p2.setX(mEndX);
-        p2.setY(mEndY);
-
-        painter.setPen(paintpen);
-        painter.drawPoint(p2);
-
-        painter.setPen(linepen);
-        painter.drawLine(p1, p2);
-    }
-}
 
 void MainWindow::wheelEvent(QWheelEvent* event) {
 
@@ -133,8 +78,15 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key()== Qt::Key_Escape)
+    {
+        disconnect(item,SIGNAL(DrawFinished()),this,SLOT(drawLine()));
+                scene->removeItem(item);
+        delete item;
+    }
+}
 
 
 
