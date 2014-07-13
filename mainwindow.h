@@ -41,7 +41,6 @@ private:
     line *item1;
     circle *item2;
     ellipse *item3;
-    arc *item4;
 
 private slots:
     void drawPoint();
