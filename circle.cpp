@@ -36,7 +36,6 @@ void circle::mousePressEvent(QGraphicsSceneMouseEvent *e)
     }
     QGraphicsItem::mousePressEvent(e);
     update();
-
 }
 
 void circle:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
@@ -85,4 +84,3 @@ void circle::mouseReleaseEvent(QGraphicsSceneMouseEvent *e)
     QGraphicsItem::mouseReleaseEvent(e);
     update();
 }
-

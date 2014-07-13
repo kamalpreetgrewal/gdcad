@@ -22,7 +22,6 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *e);
 
 private:
-    QVector<QPointF> stuff;
     int x1, y1;
     bool mClick;
     bool mPaintFlag;
@@ -30,6 +29,8 @@ private:
     QPoint *mousePoint;
     Ui::MainWindow *ui;
     qreal m_scale;
+    QVector<QPointF> stuff;
+
 signals:
     void DrawFinished();
 };

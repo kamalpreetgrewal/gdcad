@@ -31,7 +31,6 @@ void line::mousePressEvent(QGraphicsSceneMouseEvent* e){
             mPaintFlag = true;
             mSecondClick = false;
             update();
-
             emit DrawFinished();
         }
     }

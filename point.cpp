@@ -16,8 +16,6 @@ QRectF point::boundingRect() const
 
 void point:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
     QRectF rect = boundingRect();
-    QPen pen(Qt::black, 4);
-
     if(mPaintFlag){
         QPen paintpen(Qt::red);
         paintpen.setWidth(4);

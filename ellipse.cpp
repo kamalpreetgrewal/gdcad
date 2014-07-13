@@ -46,8 +46,8 @@ void ellipse::mousePressEvent(QGraphicsSceneMouseEvent *e)
     }
     QGraphicsItem::mousePressEvent(e);
     update();
-
 }
+
 void ellipse::mouseMoveEvent(QGraphicsSceneMouseEvent *e)
 {
     if (e->modifiers() & Qt::ShiftModifier) {
@@ -101,5 +101,4 @@ void ellipse:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         painter->setPen(linepen);
         painter->drawEllipse(p1, majRadius, minRadius);
     }
-
 }

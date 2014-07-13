@@ -1,15 +1,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+
 #include <QMainWindow>
 #include <QPaintEvent>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QPainter>
+
 #include "line.h"
 #include "circle.h"
 #include "ellipse.h"
 #include "point.h"
-#include<QKeyEvent>
+
 namespace Ui {
 class MainWindow;
 }
@@ -23,10 +25,8 @@ public:
     ~MainWindow();
 
 protected:
-//    void mousePressEvent(QMouseEvent *e);
-  //  void paintEvent(QPaintEvent *e);
     void wheelEvent(QWheelEvent* event);
-//void keyPressEvent(QKeyEvent *event);
+
 private:
     Ui::MainWindow *ui;
     bool mFirstClick;
@@ -37,19 +37,16 @@ private:
     int mEndY;
     QGraphicsScene *scene;
     QPainter *painter;
-    line *item;
-    circle *item1;
-    point *item3;
-    ellipse *item2;
-
-
+    point *item;
+    line *item1;
+    circle *item2;
+    ellipse *item3;
 
 private slots:
-    void drawLine();
     void drawPoint();
+    void drawLine();
     void drawCircle();
     void drawEllipse();
-
 };
 
 #endif // MAINWINDOW_H

@@ -35,11 +35,7 @@ private:
     Ui::MainWindow *ui;
     qreal m_scale;
 
-public slots:
-    //void changeScale(int scale);
-
 signals:
-    void scaleChanged(int scale);
     void DrawFinished();
 };
 
