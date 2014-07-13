@@ -5,7 +5,7 @@
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),    ui(new Ui::MainWindow)
+    QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     setWindowTitle(tr("GD CAD"));
@@ -16,6 +16,14 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     for(int y = 0; y <= ui->graphicsView->height(); y += 10){
         scene->addLine(0,y,ui->graphicsView->width(),y,QPen(Qt::green));
+    }
+
+    for(int x = 10; x <= ui->graphicsView->width(); x += 100){
+        scene->addLine(x,0,x,ui->graphicsView->height(),QPen(Qt::darkGreen));
+    }
+
+    for(int y = 10; y <= ui->graphicsView->height(); y += 100){
+        scene->addLine(0,y,ui->graphicsView->width(),y,QPen(Qt::darkGreen));
     }
 
     ui->graphicsView->setScene(scene);
