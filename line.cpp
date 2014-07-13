@@ -6,7 +6,7 @@ line::line()
     mFirstClick = true;
     mSecondClick = false;
     mPaintFlag = false;
-    setFlags(ItemIsSelectable);
+    setFlag(ItemIsSelectable);
     setAcceptHoverEvents(true);
 }
 

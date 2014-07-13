@@ -4,8 +4,8 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
-#include<QMouseEvent>
-#include<QDebug>
+#include <QMouseEvent>
+#include <QDebug>
 #include "ui_mainwindow.h"
 #include "qmath.h"
 
@@ -15,9 +15,7 @@ class circle: public QObject, public QGraphicsItem
 public:
     circle();
     QRectF boundingRect() const;
-    virtual void paint(QPainter * painter,
-                       const QStyleOptionGraphicsItem * option,
-                       QWidget * widget);
+    virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *e);
@@ -29,10 +27,7 @@ private:
     bool mFirstClick;
     bool mSecondClick;
     bool mPaintFlag;
-    bool Pressed;
-    QPoint *mousePoint;
     Ui::MainWindow *ui;
-    qreal m_scale;
     QVector<QPointF> stuff;
 
 signals:

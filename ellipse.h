@@ -1,21 +1,22 @@
 #ifndef ELLIPSE_H
 #define ELLIPSE_H
+
 #include <QPainter>
 #include <QGraphicsItem>
-#include<QMouseEvent>
-#include<QDebug>
+#include <QMouseEvent>
+#include <QDebug>
 #include <QGraphicsSceneMouseEvent>
+
 #include "ui_mainwindow.h"
 #include "qmath.h"
+
 class ellipse: public QObject, public QGraphicsItem
 {
     Q_OBJECT
 public:
     ellipse();
     QRectF boundingRect() const;
-    virtual void paint(QPainter * painter,
-                       const QStyleOptionGraphicsItem * option,
-                       QWidget * widget);
+    virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *e);
@@ -23,17 +24,14 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *e);
 
 private:
-    QVector<QPointF> stuff;
     int x1, y1, x2, y2, x3, y3;
     int majRadius, minRadius;
     bool mFirstClick;
     bool mSecondClick;
     bool mThirdClick;
     bool mPaintFlag;
-    bool Pressed;
-    QPoint *mousePoint;
     Ui::MainWindow *ui;
-    qreal m_scale;
+    QVector<QPointF> stuff;
 
 signals:
     void DrawFinished();

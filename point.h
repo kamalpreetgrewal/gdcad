@@ -25,10 +25,7 @@ private:
     int x1, y1;
     bool mClick;
     bool mPaintFlag;
-    bool Pressed;
-    QPoint *mousePoint;
     Ui::MainWindow *ui;
-    qreal m_scale;
     QVector<QPointF> stuff;
 
 signals:

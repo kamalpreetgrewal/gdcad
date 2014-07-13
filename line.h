@@ -15,7 +15,6 @@ public:
     line();
     QRectF boundingRect() const;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    qreal scale() const { return m_scale; }
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *e);
@@ -27,9 +26,6 @@ private:
     bool mFirstClick;
     bool mSecondClick;
     bool mPaintFlag;
-    bool Pressed;
-    QPoint *mousePoint;
-    qreal m_scale;
     QVector<QPointF> stuff;
 
 signals:
