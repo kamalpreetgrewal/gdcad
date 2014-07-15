@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
         scene->addLine(0,y,ui->graphicsView->width(),y,QPen(Qt::darkGreen));
     }
 
+    qApp->installEventFilter(this);
     ui->graphicsView->setScene(scene);
 
     connect(ui->pointButton, SIGNAL(clicked()), this, SLOT(drawPoint()));
@@ -38,6 +39,17 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionCircle, SIGNAL(triggered()), this, SLOT(drawCircle()));
     connect(ui->actionEllipse, SIGNAL(triggered()), this, SLOT(drawEllipse()));
 }
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+    if (event->type() == QEvent::MouseMove)
+    {
+        QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
+        statusBar()->showMessage(QString("Mouse move (%1,%2)").arg(mouseEvent->pos().x()).arg(mouseEvent->pos().y()));
+    }
+    return false;
+}
+
 
 void MainWindow::drawPoint(){
     ui->graphicsView->setScene(scene);
