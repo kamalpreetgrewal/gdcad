@@ -41,7 +41,6 @@ private:
     line *item1;
     circle *item2;
     ellipse *item3;
-    arc *item4;
     bool eventFilter(QObject *obj, QEvent *event);
 
 private slots:
@@ -49,7 +48,6 @@ private slots:
     void drawLine();
     void drawCircle();
     void drawEllipse();
-    void drawArc();
 };
 
 #endif // MAINWINDOW_H
