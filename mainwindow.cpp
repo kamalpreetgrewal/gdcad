@@ -3,6 +3,8 @@
 
 #include <QMouseEvent>
 #include <QDebug>
+#include <QHBoxLayout>
+#include <QDateTime>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
@@ -11,24 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowTitle(tr("GD CAD"));
     scene =  new QGraphicsScene;
 
-    for(int x = 0; x <= ui->graphicsView->width(); x += 10){
-        scene->addLine(x,0,x,ui->graphicsView->height(),QPen(Qt::green));
-    }
-    for(int y = 0; y <= ui->graphicsView->height(); y += 10){
-        scene->addLine(0,y,ui->graphicsView->width(),y,QPen(Qt::green));
-    }
-
-    for(int x = 10; x <= ui->graphicsView->width(); x += 100){
-        scene->addLine(x,0,x,ui->graphicsView->height(),QPen(Qt::darkGreen));
-    }
-
-    for(int y = 10; y <= ui->graphicsView->height(); y += 100){
-        scene->addLine(0,y,ui->graphicsView->width(),y,QPen(Qt::darkGreen));
-    }
-
     qApp->installEventFilter(this);
     ui->graphicsView->setScene(scene);
-
     connect(ui->pointButton, SIGNAL(clicked()), this, SLOT(drawPoint()));
     connect(ui->lineButton, SIGNAL(clicked()), this, SLOT(drawLine()));
     connect(ui->circleButton, SIGNAL(clicked()), this, SLOT(drawCircle()));
@@ -38,7 +24,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionLine, SIGNAL(triggered()), this, SLOT(drawLine()));
     connect(ui->actionCircle, SIGNAL(triggered()), this, SLOT(drawCircle()));
     connect(ui->actionEllipse, SIGNAL(triggered()), this, SLOT(drawEllipse()));
+    connect(ui->actionQuit, SIGNAL(triggered()), this, SLOT(close()));
+    connect(ui->actionPrint, SIGNAL(triggered()), this, SLOT(filePrint()));
+    connect(ui->actionPrintPreview, SIGNAL(triggered()), this, SLOT(filePrintPreview()));
 }
+
+
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
@@ -50,9 +41,66 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     return false;
 }
 
+void MainWindow::paintGrid(QPainter* painter, const QRectF& rect)
+{
+    int gridInterval = 100; //interval to draw grid lines at
+    painter->setWorldMatrixEnabled(true);
+
+    qreal left = int(rect.left()) - (int(rect.left()) % gridInterval );
+    qreal top = int(rect.top()) - (int(rect.top()) % gridInterval );
+
+    QVarLengthArray<QLineF, 100> linesX;
+    for (qreal x = left; x < rect.right(); x += gridInterval )
+        linesX.append(QLineF(x, rect.top(), x, rect.bottom()));
+
+    QVarLengthArray<QLineF, 100> linesY;
+    for (qreal y = top; y < rect.bottom(); y += gridInterval )
+        linesY.append(QLineF(rect.left(), y, rect.right(), y));
+
+    painter->drawLines(linesX.data(), linesX.size());
+    painter->drawLines(linesY.data(), linesY.size());
+}
+
+void  MainWindow::filePrintPreview()
+{
+    // display print preview dialog
+    QPrinter printer( QPrinter::HighResolution );
+    QPrintPreviewDialog preview( &printer, this );
+    connect( &preview, SIGNAL(paintRequested(QPrinter*)), SLOT(print(QPrinter*)) );
+    preview.exec();
+}
+
+void  MainWindow::filePrint()
+{
+    // display print dialog and if accepted print
+    QPrinter printer( QPrinter::HighResolution );
+    QPrintDialog dialog( &printer, this );
+    if ( dialog.exec() == QDialog::Accepted ) print( &printer );
+}
+
+
+void  MainWindow::print( QPrinter* printer )
+{
+    QPainter painter( printer );
+    int w = printer->pageRect().width();
+    int h = printer->pageRect().height();
+    QRect page( 0, 0, w, h );
+
+    QFont font = painter.font();
+    font.setPixelSize( (w+h) / 100 );
+    painter.setFont( font );
+
+    painter.drawText( page, Qt::AlignTop    | Qt::AlignLeft, "QSimulate" );
+    painter.drawText( page, Qt::AlignBottom | Qt::AlignLeft, QString(getenv("USER")) );
+    painter.drawText( page, Qt::AlignBottom | Qt::AlignRight,
+                      QDateTime::currentDateTime().toString( Qt::DefaultLocaleShortDate ) );
+
+    page.adjust( w/20, h/20, -w/20, -h/20 );
+    scene->render( &painter, page );
+}
 
 void MainWindow::drawPoint(){
-    ui->graphicsView->setScene(scene);
+    // ui->graphicsView->setScene(scene);
     item = new point;
     scene->addItem(item);
     qDebug() << "Point Created";
