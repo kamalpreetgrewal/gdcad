@@ -17,121 +17,108 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>20</y>
-      <width>551</width>
-      <height>361</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>11</x>
-      <y>21</y>
-      <width>40</width>
-      <height>214</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QToolButton" name="pointButton">
-       <property name="toolTip">
-        <string/>
-       </property>
-       <property name="toolTipDuration">
-        <number>2</number>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="images.qrc">
-         <normaloff>:/res/points.png</normaloff>:/res/points.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>30</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-       <property name="autoRepeat">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QToolButton" name="lineButton">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="images.qrc">
-         <normaloff>:/res/line.png</normaloff>:/res/line.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>30</width>
-         <height>30</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QToolButton" name="circleButton">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="images.qrc">
-         <normaloff>:/res/circles.png</normaloff>:/res/circles.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>30</width>
-         <height>30</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QToolButton" name="ellipseButton">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="images.qrc">
-         <normaloff>:/res/ellipse.png</normaloff>:/res/ellipse.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>30</width>
-         <height>30</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QToolButton" name="pointButton">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="toolTipDuration">
+         <number>2</number>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="images.qrc">
+          <normaloff>:/res/points.png</normaloff>:/res/points.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="autoRepeat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="lineButton">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="images.qrc">
+          <normaloff>:/res/line.png</normaloff>:/res/line.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="circleButton">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="images.qrc">
+          <normaloff>:/res/circles.png</normaloff>:/res/circles.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="ellipseButton">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="images.qrc">
+          <normaloff>:/res/ellipse.png</normaloff>:/res/ellipse.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="1">
+     <widget class="QGraphicsView" name="graphicsView"/>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -153,12 +140,12 @@
     <addaction name="actionSave_As"/>
     <addaction name="actionImport"/>
     <addaction name="actionExport"/>
+    <addaction name="actionClose"/>
+    <addaction name="separator"/>
     <addaction name="actionPrint"/>
+    <addaction name="actionPrintPreview"/>
     <addaction name="separator"/>
-    <addaction name="actionPrint_Preview"/>
     <addaction name="actionQuit"/>
-    <addaction name="separator"/>
-    <addaction name="actionQuit_2"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -339,7 +326,7 @@
     <string>Import</string>
    </property>
   </action>
-  <action name="actionPrint">
+  <action name="actionClose">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -347,17 +334,17 @@
     <string>Close</string>
    </property>
   </action>
-  <action name="actionPrint_Preview">
+  <action name="actionPrint">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Print </string>
    </property>
   </action>
-  <action name="actionQuit">
+  <action name="actionPrintPreview">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Print Preview</string>
@@ -891,9 +878,9 @@
     <string>About</string>
    </property>
   </action>
-  <action name="actionQuit_2">
+  <action name="actionQuit">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Quit</string>
