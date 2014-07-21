@@ -13,7 +13,7 @@ line::line()
 QRectF line::boundingRect() const
 {
     // outer most edges
-    return QRectF(0,0,300,300);
+   return QRectF(0,0,1450,1400);
 }
 
 void line::mousePressEvent(QGraphicsSceneMouseEvent* e){

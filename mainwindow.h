@@ -47,7 +47,6 @@ private:
     line *item1;
     circle *item2;
     ellipse *item3;
-    grid *Grid;
     bool eventFilter(QObject *obj, QEvent *event);
     QPrinter *printer;
 

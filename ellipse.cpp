@@ -13,7 +13,7 @@ ellipse::ellipse()
 QRectF ellipse::boundingRect() const
 {
     // outer most edges
-    return QRectF(0,0,800,800);
+   return QRectF(0,0,1450,1400);
 }
 
 void ellipse::mousePressEvent(QGraphicsSceneMouseEvent *e)
