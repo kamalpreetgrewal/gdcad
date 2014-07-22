@@ -11,10 +11,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle(tr("GD CAD"));
-    scene =  new QGraphicsScene;
+    newFile();
 
     qApp->installEventFilter(this);
-    ui->graphicsView->setScene(scene);
+
     connect(ui->pointButton, SIGNAL(clicked()), this, SLOT(drawPoint()));
     connect(ui->lineButton, SIGNAL(clicked()), this, SLOT(drawLine()));
     connect(ui->circleButton, SIGNAL(clicked()), this, SLOT(drawCircle()));
@@ -24,12 +24,18 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionLine, SIGNAL(triggered()), this, SLOT(drawLine()));
     connect(ui->actionCircle, SIGNAL(triggered()), this, SLOT(drawCircle()));
     connect(ui->actionEllipse, SIGNAL(triggered()), this, SLOT(drawEllipse()));
+
+    connect(ui->actionNew, SIGNAL(triggered()), this, SLOT(newFile()));
     connect(ui->actionQuit, SIGNAL(triggered()), this, SLOT(close()));
     connect(ui->actionPrint, SIGNAL(triggered()), this, SLOT(filePrint()));
     connect(ui->actionPrintPreview, SIGNAL(triggered()), this, SLOT(filePrintPreview()));
 }
 
 
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
@@ -39,6 +45,12 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
         statusBar()->showMessage(QString("Mouse move (%1,%2)").arg(mouseEvent->pos().x()).arg(mouseEvent->pos().y()));
     }
     return false;
+}
+
+void MainWindow::newFile()
+{
+    scene =  new QGraphicsScene;
+     ui->graphicsView->setScene(scene);
 }
 
 void  MainWindow::filePrintPreview()
@@ -123,9 +135,4 @@ void MainWindow::wheelEvent(QWheelEvent* event) {
         // Zooming out
         ui->graphicsView->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
     }
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
 }

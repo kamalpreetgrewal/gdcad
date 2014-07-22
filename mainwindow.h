@@ -55,6 +55,7 @@ private slots:
     void drawLine();
     void drawCircle();
     void drawEllipse();
+    void newFile();
 
 public slots:
     void filePrintPreview();
