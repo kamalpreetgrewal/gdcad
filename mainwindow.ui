@@ -23,10 +23,10 @@
       <item>
        <widget class="QToolButton" name="pointButton">
         <property name="toolTip">
-         <string/>
+         <string>Point</string>
         </property>
         <property name="toolTipDuration">
-         <number>2</number>
+         <number>200000</number>
         </property>
         <property name="text">
          <string/>
@@ -51,6 +51,12 @@
       </item>
       <item>
        <widget class="QToolButton" name="lineButton">
+        <property name="toolTip">
+         <string>Line</string>
+        </property>
+        <property name="toolTipDuration">
+         <number>200000</number>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -68,6 +74,12 @@
       </item>
       <item>
        <widget class="QToolButton" name="circleButton">
+        <property name="toolTip">
+         <string>Circle</string>
+        </property>
+        <property name="toolTipDuration">
+         <number>200000</number>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -85,6 +97,12 @@
       </item>
       <item>
        <widget class="QToolButton" name="ellipseButton">
+        <property name="toolTip">
+         <string>Ellipse</string>
+        </property>
+        <property name="toolTipDuration">
+         <number>200000</number>
+        </property>
         <property name="text">
          <string/>
         </property>
