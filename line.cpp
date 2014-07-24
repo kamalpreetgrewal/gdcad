@@ -13,7 +13,7 @@ line::line()
 QRectF line::boundingRect() const
 {
     // outer most edges
-   return QRectF(0,0,1450,1400);
+    return QRectF(0,0,1450,1400);
 }
 
 void line::mousePressEvent(QGraphicsSceneMouseEvent* e){
@@ -39,7 +39,6 @@ void line::mousePressEvent(QGraphicsSceneMouseEvent* e){
 }
 
 void line:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-    QRectF rect = boundingRect();
     if(mPaintFlag){
         QPen paintpen(Qt::red);
         paintpen.setWidth(4);

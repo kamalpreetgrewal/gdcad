@@ -65,7 +65,6 @@ void ellipse::mouseReleaseEvent(QGraphicsSceneMouseEvent *e)
 }
 
 void ellipse:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-    QRectF rect = boundingRect();
     if(mPaintFlag){
 
         QPen paintpen(Qt::red);

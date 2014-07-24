@@ -5,36 +5,41 @@
 #include <QDebug>
 #include <QHBoxLayout>
 #include <QDateTime>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QTextEdit>
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent), ui(new Ui::MainWindow)
+    QMainWindow(parent)
 {
-    ui->setupUi(this);
+    setupUi(this);
     setWindowTitle(tr("GD CAD"));
     newFile();
 
     qApp->installEventFilter(this);
 
-    connect(ui->pointButton, SIGNAL(clicked()), this, SLOT(drawPoint()));
-    connect(ui->lineButton, SIGNAL(clicked()), this, SLOT(drawLine()));
-    connect(ui->circleButton, SIGNAL(clicked()), this, SLOT(drawCircle()));
-    connect(ui->ellipseButton, SIGNAL(clicked()), this, SLOT(drawEllipse()));
+    connect(pointButton, SIGNAL(clicked()), this, SLOT(drawPoint()));
+    connect(lineButton, SIGNAL(clicked()), this, SLOT(drawLine()));
+    connect(circleButton, SIGNAL(clicked()), this, SLOT(drawCircle()));
+    connect(ellipseButton, SIGNAL(clicked()), this, SLOT(drawEllipse()));
 
-    connect(ui->actionPoints, SIGNAL(triggered()), this, SLOT(drawPoint()));
-    connect(ui->actionLine, SIGNAL(triggered()), this, SLOT(drawLine()));
-    connect(ui->actionCircle, SIGNAL(triggered()), this, SLOT(drawCircle()));
-    connect(ui->actionEllipse, SIGNAL(triggered()), this, SLOT(drawEllipse()));
+    connect(actionPoints, SIGNAL(triggered()), this, SLOT(drawPoint()));
+    connect(actionLine, SIGNAL(triggered()), this, SLOT(drawLine()));
+    connect(actionCircle, SIGNAL(triggered()), this, SLOT(drawCircle()));
+    connect(actionEllipse, SIGNAL(triggered()), this, SLOT(drawEllipse()));
 
-    connect(ui->actionNew, SIGNAL(triggered()), this, SLOT(newFile()));
-    connect(ui->actionQuit, SIGNAL(triggered()), this, SLOT(close()));
-    connect(ui->actionPrint, SIGNAL(triggered()), this, SLOT(filePrint()));
-    connect(ui->actionPrintPreview, SIGNAL(triggered()), this, SLOT(filePrintPreview()));
+    connect(actionNew, SIGNAL(triggered()), this, SLOT(newFile()));
+    connect(actionQuit, SIGNAL(triggered()), this, SLOT(close()));
+    connect(actionPrint, SIGNAL(triggered()), this, SLOT(filePrint()));
+    connect(actionPrintPreview, SIGNAL(triggered()), this, SLOT(filePrintPreview()));
+    connect(actionZoom_In, SIGNAL(triggered()), this, SLOT(on_actionZoom_In_triggered()));
+    connect(actionZoom_Out, SIGNAL(triggered()), this, SLOT(on_actionZoom_Out_triggered()));
+    connect(actionInsert_Image,SIGNAL(triggered()),this,SLOT(on_actionInsert_Image_triggered()));
 }
 
 
 MainWindow::~MainWindow()
 {
-    delete ui;
 }
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
@@ -42,7 +47,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     if (event->type() == QEvent::MouseMove)
     {
         QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
-        statusBar()->showMessage(QString("Mouse move (%1,%2)").arg(mouseEvent->pos().x()).arg(mouseEvent->pos().y()));
+        QMainWindow::statusBar()->showMessage(QString("Mouse move (%1,%2)").arg(mouseEvent->pos().x()).arg(mouseEvent->pos().y()));
     }
     return false;
 }
@@ -50,7 +55,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 void MainWindow::newFile()
 {
     scene =  new QGraphicsScene;
-     ui->graphicsView->setScene(scene);
+    graphicsView->setScene(scene);
 }
 
 void  MainWindow::filePrintPreview()
@@ -70,7 +75,6 @@ void  MainWindow::filePrint()
     if ( dialog.exec() == QDialog::Accepted ) print( &printer );
 }
 
-
 void  MainWindow::print( QPrinter* printer )
 {
     QPainter painter( printer );
@@ -82,8 +86,6 @@ void  MainWindow::print( QPrinter* printer )
     font.setPixelSize( (w+h) / 100 );
     painter.setFont( font );
 
-    painter.drawText( page, Qt::AlignTop    | Qt::AlignLeft, "QSimulate" );
-    painter.drawText( page, Qt::AlignBottom | Qt::AlignLeft, QString(getenv("USER")) );
     painter.drawText( page, Qt::AlignBottom | Qt::AlignRight,
                       QDateTime::currentDateTime().toString( Qt::DefaultLocaleShortDate ) );
 
@@ -92,7 +94,6 @@ void  MainWindow::print( QPrinter* printer )
 }
 
 void MainWindow::drawPoint(){
-    // ui->graphicsView->setScene(scene);
     item = new point;
     scene->addItem(item);
     qDebug() << "Point Created";
@@ -100,7 +101,6 @@ void MainWindow::drawPoint(){
 }
 
 void MainWindow::drawLine(){
-    ui->graphicsView->setScene(scene);
     item1 = new line;
     scene->addItem(item1);
     qDebug() << "Line Created";
@@ -108,7 +108,6 @@ void MainWindow::drawLine(){
 }
 
 void MainWindow::drawCircle(){
-    ui->graphicsView->setScene(scene);
     item2 = new circle;
     scene->addItem(item2);
     qDebug() << "Circle Created";
@@ -116,7 +115,6 @@ void MainWindow::drawCircle(){
 }
 
 void MainWindow::drawEllipse(){
-    ui->graphicsView->setScene(scene);
     item3 = new ellipse;
     scene->addItem(item3);
     qDebug() << "Ellipse Created";
@@ -124,15 +122,73 @@ void MainWindow::drawEllipse(){
 }
 
 void MainWindow::wheelEvent(QWheelEvent* event) {
-    ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+    graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 
     // Scale the view / do the zoom
     double scaleFactor = 1.15;
     if(event->delta() > 0) {
         // Zoom in
-        ui->graphicsView->scale(scaleFactor, scaleFactor);
+        graphicsView->scale(scaleFactor, scaleFactor);
     } else {
         // Zooming out
-        ui->graphicsView->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
+        graphicsView->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
     }
+}
+
+void MainWindow::on_actionOpen_triggered()
+{
+    QString filename=QFileDialog::getOpenFileName(this, tr("Open File"), QString(), tr("file Name(*.dwg|*.DWG|*.dxf)"));
+    if (!filename.isEmpty()) {
+        QFile file(filename);
+        if (!file.open(QIODevice::ReadOnly)) {
+            QMessageBox::critical(this, tr("Error"), tr("Could not open file"));
+            return;
+        }
+    }
+}
+void MainWindow::on_actionSave_triggered()
+{
+    QString filename=QFileDialog::getSaveFileName(this, tr("Save File"), QString(), tr("file Name(*.txt)"));
+    if(!filename.isEmpty()) {
+        QFile file(filename);
+        if (!file.open(QIODevice::WriteOnly)) {
+            QMessageBox::critical(this, tr("Error"), tr("Could not open file"));
+            return;
+        } else {
+            QTextStream stream(&file);
+            QTextEdit *textEdit;
+            stream << textEdit->toPlainText();
+            stream.flush();
+            file.close();
+        }
+    }
+}
+
+void MainWindow::on_actionZoom_In_triggered(){
+    QWheelEvent *event;
+    double scaleFactor = 1.15;
+    if(event->delta() > 0) {
+        // Zoom in
+        graphicsView->scale(scaleFactor, scaleFactor);
+    }
+}
+
+void MainWindow::on_actionZoom_Out_triggered(){
+    QWheelEvent *event;
+    double scaleFactor = 1.15;
+    if(event->delta() > 0) {
+        // Zoom out
+        graphicsView->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
+    }
+}
+
+void MainWindow::on_actionInsert_Image_triggered(){
+    QString imagePath =QFileDialog::getOpenFileName(this,tr("open File"),"",tr("JPEG(*.jpg *.jpeg);;PNG(*.png)"));
+    imageObject =new QImage();
+    imageObject->load(imagePath);
+    image = QPixmap::fromImage(*imageObject);
+    scene =new QGraphicsScene(this);
+    scene->addPixmap(image);
+    scene->setSceneRect(image.rect());
+    graphicsView->setScene(scene);
 }

@@ -4,9 +4,7 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
-#include <QMouseEvent>
 #include <QDebug>
-#include "ui_mainwindow.h"
 #include "qmath.h"
 
 class circle: public QObject, public QGraphicsItem
@@ -27,7 +25,6 @@ private:
     bool mFirstClick;
     bool mSecondClick;
     bool mPaintFlag;
-    Ui::MainWindow *ui;
     QVector<QPointF> stuff;
 
 signals:

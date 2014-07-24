@@ -3,7 +3,6 @@
 
 #include <QPainter>
 #include <QGraphicsItem>
-#include <QMouseEvent>
 #include <QDebug>
 #include <QGraphicsSceneMouseEvent>
 #include "ui_mainwindow.h"

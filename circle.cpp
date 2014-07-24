@@ -5,7 +5,7 @@ circle::circle()
     mFirstClick = true;
     mSecondClick = false;
     mPaintFlag = false;
-    setFlags(ItemIsSelectable );
+    setFlags(ItemIsSelectable);
     setAcceptHoverEvents(true);
 }
 
@@ -39,8 +39,7 @@ void circle::mousePressEvent(QGraphicsSceneMouseEvent *e)
 }
 
 void circle:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-    QRectF rect = boundingRect();
-    if(mPaintFlag){
+      if(mPaintFlag){
 
         QPen paintpen(Qt::red);
         paintpen.setWidth(4);

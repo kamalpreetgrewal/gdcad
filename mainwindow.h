@@ -5,33 +5,27 @@
 #include <QPaintEvent>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QPainter>
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport/QPrintDialog>
 #include <QtPrintSupport/QPrintPreviewDialog>
-#include <QPainter>
-#include <QRectF>
 
 #include "line.h"
 #include "circle.h"
 #include "ellipse.h"
 #include "point.h"
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+class MainWindow : public QMainWindow, public Ui::MainWindow
 {
     Q_OBJECT
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void paintGrid(QPainter* painter, const QRectF& rect);
-    QGraphicsScene *scene;
 
 protected:
     void wheelEvent(QWheelEvent* event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 private:
     Ui::MainWindow *ui;
@@ -42,13 +36,17 @@ private:
     int mEndX;
     int mEndY;
 
+    QGraphicsScene *scene;
     QPainter *painter;
     point *item;
     line *item1;
     circle *item2;
     ellipse *item3;
-    bool eventFilter(QObject *obj, QEvent *event);
     QPrinter *printer;
+    QPixmap image;
+    QImage *imageObject;
+
+    bool eventFilter(QObject *obj, QEvent *event);
 
 private slots:
     void drawPoint();
@@ -57,7 +55,12 @@ private slots:
     void drawEllipse();
     void newFile();
 
-public slots:
+    void on_actionSave_triggered();
+    void on_actionOpen_triggered();
+    void on_actionZoom_In_triggered();
+    void on_actionZoom_Out_triggered();
+    void on_actionInsert_Image_triggered();
+
     void filePrintPreview();
     void filePrint();
     void print(QPrinter *);
