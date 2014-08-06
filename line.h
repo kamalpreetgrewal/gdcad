@@ -3,12 +3,13 @@
 
 #include <QPainter>
 #include <QGraphicsItem>
+#include <QGraphicsPolygonItem>
 #include <QDebug>
 #include <QGraphicsSceneMouseEvent>
+#include <QGraphicsSceneHoverEvent>
 #include "ui_mainwindow.h"
 
-class line: public QObject, public QGraphicsItem
-{
+class line: public QObject, public QGraphicsItem{
     Q_OBJECT
 public:
     line();
@@ -25,7 +26,10 @@ private:
     bool mFirstClick;
     bool mSecondClick;
     bool mPaintFlag;
+    bool mTempFlag;
     QVector<QPointF> stuff;
+    QPointF p1,p2,move_p;
+    QPen paintpen, linePen;
 
 signals:
     void DrawFinished();

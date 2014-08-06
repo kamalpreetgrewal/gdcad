@@ -1,11 +1,13 @@
 #include "line.h"
 #include <QDebug>
+#include <QMouseEvent>
 
 line::line()
 {
     mFirstClick = true;
     mSecondClick = false;
     mPaintFlag = false;
+    mTempFlag = false;
     setFlag(ItemIsSelectable);
     setAcceptHoverEvents(true);
 }
@@ -17,11 +19,13 @@ QRectF line::boundingRect() const
 }
 
 void line::mousePressEvent(QGraphicsSceneMouseEvent* e){
+
     if(e->button()==Qt::LeftButton) {
         if(mFirstClick){
             x1 = e->pos().x();
             y1 = e->pos().y();
             mFirstClick = false;
+            mTempFlag = true;
             mSecondClick = true;
         }
 
@@ -40,33 +44,35 @@ void line::mousePressEvent(QGraphicsSceneMouseEvent* e){
 
 void line:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
     if(mPaintFlag){
-        QPen paintpen(Qt::red);
+        paintpen.setColor(Qt::red);
         paintpen.setWidth(4);
 
-        QPen linepen(Qt::black);
-        linepen.setWidth(1);
+        linePen.setColor(Qt::black);
+        linePen.setWidth(1);
 
-        QPoint p1;
+        painter->setRenderHint(QPainter::Antialiasing, true);
+
         p1.setX(x1);
         p1.setY(y1);
 
         painter->setPen(paintpen);
         painter->drawPoint(p1);
 
-        QPoint p2;
-        p2.setX(x2);
-        p2.setY(y2);
+        p2.setX(move_p.x());
+        p2.setY(move_p.y());
 
         painter->setPen(paintpen);
         painter->drawPoint(p2);
 
-        painter->setPen(linepen);
+        painter->setPen(linePen);
         painter->drawLine(p1, p2);
     }
 }
 
 void line::mouseMoveEvent(QGraphicsSceneMouseEvent *e)
 {
+    move_p = e->pos();
+    update();
     if (e->modifiers() & Qt::ShiftModifier) {
         stuff << e->pos();
         update();
@@ -80,3 +86,6 @@ void line::mouseReleaseEvent(QGraphicsSceneMouseEvent *e)
     QGraphicsItem::mouseReleaseEvent(e);
     update();
 }
+
+
+
