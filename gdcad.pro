@@ -3,6 +3,7 @@
 # Project created by QtCreator 2014-06-23T00:27:11
 #
 #-------------------------------------------------
+QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
 
 QT       += core gui printsupport
 
