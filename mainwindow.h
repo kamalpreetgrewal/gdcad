@@ -25,7 +25,7 @@ public:
 
 protected:
     void wheelEvent(QWheelEvent* event);
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *e);
 
 private:
     Ui::MainWindow *ui;

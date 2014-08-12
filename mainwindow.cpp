@@ -56,6 +56,7 @@ void MainWindow::newFile()
 {
     scene =  new QGraphicsScene;
     graphicsView->setScene(scene);
+    graphicsView->setDragMode(QGraphicsView::RubberBandDrag);
 }
 
 void  MainWindow::filePrintPreview()
@@ -191,4 +192,16 @@ void MainWindow::on_actionInsert_Image_triggered(){
     scene->addPixmap(image);
     scene->setSceneRect(image.rect());
     graphicsView->setScene(scene);
+}
+
+void MainWindow::mouseMoveEvent(QGraphicsSceneMouseEvent *e)
+{
+    if (e->type() == QEvent::GraphicsSceneMouseMove)
+    {
+        QGraphicsSceneMouseEvent *mouseEvent = static_cast<QGraphicsSceneMouseEvent*>(e);
+        qDebug() << "mouse";
+        QMainWindow::statusBar()->showMessage(QString("Mouse move (%1,%2)").arg(mouseEvent->pos().x()).arg(mouseEvent->pos().y()));
+    }
+    qDebug() << "mouse";
+
 }

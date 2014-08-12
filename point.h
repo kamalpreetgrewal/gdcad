@@ -4,7 +4,9 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
-#include "ui_mainwindow.h"
+
+#include "storage.h"
+using namespace std;
 
 class point: public QObject,public QGraphicsItem
 {
@@ -20,11 +22,13 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *e);
 
 private:
-    int x1, y1;
+    QPointF p1;
+    double x1, y1;
     bool mClick;
     bool mPaintFlag;
-    Ui::MainWindow *ui;
-    QVector<QPointF> stuff;
+    vector<storage> store_point;
+    vector<storage>::iterator i;
+    storage _store;
 
 signals:
     void DrawFinished();

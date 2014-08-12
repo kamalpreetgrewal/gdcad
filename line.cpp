@@ -7,8 +7,8 @@ line::line()
     mFirstClick = true;
     mSecondClick = false;
     mPaintFlag = false;
-    mTempFlag = false;
-    setFlag(ItemIsSelectable);
+
+    setFlags(ItemIsSelectable);
     setAcceptHoverEvents(true);
 }
 
@@ -22,10 +22,11 @@ void line::mousePressEvent(QGraphicsSceneMouseEvent* e){
 
     if(e->button()==Qt::LeftButton) {
         if(mFirstClick){
+
             x1 = e->pos().x();
             y1 = e->pos().y();
+
             mFirstClick = false;
-            mTempFlag = true;
             mSecondClick = true;
         }
 
@@ -37,15 +38,19 @@ void line::mousePressEvent(QGraphicsSceneMouseEvent* e){
             update();
             emit DrawFinished();
         }
+        check_p = e->pos();
     }
+
     QGraphicsItem::mousePressEvent(e);
     update();
 }
 
 void line:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+    setCursor(Qt::CrossCursor);
     if(mPaintFlag){
+
         paintpen.setColor(Qt::red);
-        paintpen.setWidth(4);
+        paintpen.setWidth(6);
 
         linePen.setColor(Qt::black);
         linePen.setWidth(1);
@@ -73,6 +78,12 @@ void line::mouseMoveEvent(QGraphicsSceneMouseEvent *e)
 {
     move_p = e->pos();
     update();
+
+    if(check_p == e->pos())
+    {
+        qDebug()  << "Item exists";
+    }
+
     if (e->modifiers() & Qt::ShiftModifier) {
         stuff << e->pos();
         update();
@@ -86,6 +97,3 @@ void line::mouseReleaseEvent(QGraphicsSceneMouseEvent *e)
     QGraphicsItem::mouseReleaseEvent(e);
     update();
 }
-
-
-

@@ -13,7 +13,7 @@ ellipse::ellipse()
 QRectF ellipse::boundingRect() const
 {
     // outer most edges
-   return QRectF(0,0,1450,1400);
+    return QRectF(0,0,1450,1400);
 }
 
 void ellipse::mousePressEvent(QGraphicsSceneMouseEvent *e)
@@ -66,7 +66,6 @@ void ellipse::mouseReleaseEvent(QGraphicsSceneMouseEvent *e)
 
 void ellipse:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
     if(mPaintFlag){
-
         QPen paintpen(Qt::red);
         paintpen.setWidth(4);
 
@@ -94,8 +93,8 @@ void ellipse:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         painter->setPen(paintpen);
         painter->drawPoint(p3);
 
-        majRadius = qSqrt(qPow((x2-x1), 2) + qPow((y2-y1), 2));
-        minRadius = qSqrt(qPow((x3-x1), 2) + qPow((y3-y1), 2));
+        majRadius = qSqrt(qPow((p2.x()-x1), 2) + qPow((p2.y()-y1), 2));
+        minRadius = qSqrt(qPow((p3.x()-x1), 2) + qPow((p3.y()-y1), 2));
 
         painter->setPen(linepen);
         painter->drawEllipse(p1, majRadius, minRadius);

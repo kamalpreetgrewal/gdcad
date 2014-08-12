@@ -6,7 +6,6 @@
 #include <QDebug>
 #include <QGraphicsSceneMouseEvent>
 
-#include "ui_mainwindow.h"
 #include "qmath.h"
 
 class ellipse: public QObject, public QGraphicsItem
@@ -29,7 +28,6 @@ private:
     bool mSecondClick;
     bool mThirdClick;
     bool mPaintFlag;
-    Ui::MainWindow *ui;
     QVector<QPointF> stuff;
 
 signals:

@@ -39,8 +39,7 @@ void circle::mousePressEvent(QGraphicsSceneMouseEvent *e)
 }
 
 void circle:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-      if(mPaintFlag){
-
+    if(mPaintFlag){
         QPen paintpen(Qt::red);
         paintpen.setWidth(4);
 

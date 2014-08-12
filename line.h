@@ -20,15 +20,15 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *e);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *e);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *e);
+    //void keyPressEvent(QKeyEvent *e);
 
 private:
     int x1, y1, x2, y2, w, h;
     bool mFirstClick;
     bool mSecondClick;
     bool mPaintFlag;
-    bool mTempFlag;
     QVector<QPointF> stuff;
-    QPointF p1,p2,move_p;
+    QPointF p1, p2, move_p, check_p;
     QPen paintpen, linePen;
 
 signals:

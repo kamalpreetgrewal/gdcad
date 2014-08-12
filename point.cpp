@@ -1,4 +1,5 @@
 #include "point.h"
+#include <QDebug>
 
 point::point()
 {
@@ -19,12 +20,13 @@ void point:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
         QPen paintpen(Qt::red);
         paintpen.setWidth(4);
 
-        QPoint p1;
+        QPointF p1;
         p1.setX(x1);
         p1.setY(y1);
 
         painter->setPen(paintpen);
         painter->drawPoint(p1);
+        update();
     }
 }
 
@@ -34,11 +36,16 @@ void point::mousePressEvent(QGraphicsSceneMouseEvent *e)
         if(mClick){
             x1 = e->pos().x();
             y1 = e->pos().y();
+
             mClick = false;
             mPaintFlag = true;
             update();
-            emit DrawFinished();
         }
+        _store.set_point(e->pos());
+        store_point.push_back(_store);
+        qDebug() << _store.getValue();
+        qDebug() << "Size of vector =" << store_point.size() << "and" << store_point.capacity();
+        update();
     }
     QGraphicsItem::mousePressEvent(e);
     update();
@@ -46,12 +53,8 @@ void point::mousePressEvent(QGraphicsSceneMouseEvent *e)
 
 void point::mouseMoveEvent(QGraphicsSceneMouseEvent *e)
 {
-    if (e->modifiers() & Qt::ShiftModifier) {
-        stuff << e->pos();
-        update();
-        return;
-    }
     QGraphicsItem::mouseMoveEvent(e);
+    update();
 }
 
 void point::mouseReleaseEvent(QGraphicsSceneMouseEvent *e)
