@@ -5,8 +5,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QString>
-#include "ui_mainwindow.h"
-#include "storage.h"
+
 using namespace std;
 
 class point: public QObject,public QGraphicsItem
