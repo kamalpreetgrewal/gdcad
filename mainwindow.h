@@ -14,7 +14,6 @@
 #include "circle.h"
 #include "ellipse.h"
 #include "point.h"
-#include "grid.h"
 
 class MainWindow : public QMainWindow, public Ui::MainWindow
 {
