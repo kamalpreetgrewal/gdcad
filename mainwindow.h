@@ -14,6 +14,7 @@
 #include "circle.h"
 #include "ellipse.h"
 #include "point.h"
+#include "grid.h"
 
 class MainWindow : public QMainWindow, public Ui::MainWindow
 {
@@ -26,6 +27,7 @@ public:
 protected:
     void wheelEvent(QWheelEvent* event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *e);
+//    void drawBackground(QPainter *painter, const QRectF &rect);
 
 private:
     Ui::MainWindow *ui;

@@ -4,7 +4,8 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
-
+#include <QString>
+#include "ui_mainwindow.h"
 #include "storage.h"
 using namespace std;
 
@@ -15,6 +16,7 @@ public:
     point();
     QRectF boundingRect() const;
     virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
+    QString coordinateX, coordinateY;
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *e);
@@ -26,12 +28,6 @@ private:
     double x1, y1;
     bool mClick;
     bool mPaintFlag;
-    vector<storage> store_point;
-    vector<storage>::iterator i;
-    storage _store;
-
-signals:
-    void DrawFinished();
 };
 
 #endif // POINT_H

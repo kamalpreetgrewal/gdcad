@@ -98,7 +98,6 @@ void MainWindow::drawPoint(){
     item = new point;
     scene->addItem(item);
     qDebug() << "Point Created";
-    connect(item, SIGNAL(DrawFinished()), this, SLOT(drawPoint()));
 }
 
 void MainWindow::drawLine(){
@@ -138,18 +137,25 @@ void MainWindow::wheelEvent(QWheelEvent* event) {
 
 void MainWindow::on_actionOpen_triggered()
 {
-    QString filename=QFileDialog::getOpenFileName(this, tr("Open File"), QString(), tr("file Name(*.dwg|*.DWG|*.dxf)"));
+    QString filename=QFileDialog::getOpenFileName(this, tr("Open File"), QString(), tr("file Name(*.dxf)"));
+    QMainWindow::statusBar()->showMessage("File opened successfully");
     if (!filename.isEmpty()) {
         QFile file(filename);
         if (!file.open(QIODevice::ReadOnly)) {
             QMessageBox::critical(this, tr("Error"), tr("Could not open file"));
             return;
         }
+        else{
+            QTextStream in(&file);
+            QString line = in.readAll();
+            QMainWindow::statusBar()->showMessage(line);
+        }
     }
 }
+
 void MainWindow::on_actionSave_triggered()
 {
-    QString filename=QFileDialog::getSaveFileName(this, tr("Save File"), QString(), tr("file Name(*.txt)"));
+    QString filename=QFileDialog::getSaveFileName(this, tr("Save File"), QString(), tr("file Name(*.dxf)"));
     if(!filename.isEmpty()) {
         QFile file(filename);
         if (!file.open(QIODevice::WriteOnly)) {
@@ -157,8 +163,14 @@ void MainWindow::on_actionSave_triggered()
             return;
         } else {
             QTextStream stream(&file);
-            QTextEdit *textEdit;
-            stream << textEdit->toPlainText();
+            QList<QGraphicsItem*> allItems = scene->items();
+            foreach (QGraphicsItem *i, allItems) {
+                if(i->type() == item->type()){
+
+                    stream << "Point " << allItems.indexOf(i,0)<< "\n";
+                    stream << "x,y:"<<item->coordinateX <<","<<item->coordinateY <<"\n";
+                }
+            }
             stream.flush();
             file.close();
         }
@@ -202,6 +214,4 @@ void MainWindow::mouseMoveEvent(QGraphicsSceneMouseEvent *e)
         qDebug() << "mouse";
         QMainWindow::statusBar()->showMessage(QString("Mouse move (%1,%2)").arg(mouseEvent->pos().x()).arg(mouseEvent->pos().y()));
     }
-    qDebug() << "mouse";
-
 }

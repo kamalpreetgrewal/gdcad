@@ -1,5 +1,6 @@
 #include "point.h"
 #include <QDebug>
+#include "mainwindow.h"
 
 point::point()
 {
@@ -17,16 +18,17 @@ QRectF point::boundingRect() const
 
 void point:: paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
     if(mPaintFlag){
-        QPen paintpen(Qt::red);
-        paintpen.setWidth(4);
+        {
+            QPen paintpen(Qt::red);
+            paintpen.setWidth(4);
+            QPointF p1;
+            p1.setX(x1);
+            p1.setY(y1);
 
-        QPointF p1;
-        p1.setX(x1);
-        p1.setY(y1);
-
-        painter->setPen(paintpen);
-        painter->drawPoint(p1);
-        update();
+            painter->setPen(paintpen);
+            painter->drawPoint(p1);
+            update();
+        }
     }
 }
 
@@ -36,16 +38,13 @@ void point::mousePressEvent(QGraphicsSceneMouseEvent *e)
         if(mClick){
             x1 = e->pos().x();
             y1 = e->pos().y();
-
+            coordinateX = QString::number(x1, 'g', 5);
+            coordinateY = QString::number(y1, 'g', 5);
+            qDebug() << coordinateX << "," <<coordinateY;
             mClick = false;
             mPaintFlag = true;
             update();
         }
-        _store.set_point(e->pos());
-        store_point.push_back(_store);
-        qDebug() << _store.getValue();
-        qDebug() << "Size of vector =" << store_point.size() << "and" << store_point.capacity();
-        update();
     }
     QGraphicsItem::mousePressEvent(e);
     update();
